@@ -1,4 +1,3 @@
-# Misc-GIMP-scripts
-Misc python scripts for processing files in GIMP. Generally aimed at automating simple processes.
+# Misc-scripts
 
-Open for general use/modificaion - if you do improve on any of the scrips, please add the changes here.
+A collection of scripts and snippets of code that aren't part of a larger project. They're mainly here so I can access them if I need them, but may have some use for other people.
