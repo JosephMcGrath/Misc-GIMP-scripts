@@ -26,8 +26,8 @@ import os
 import re
 
 #--Define function------------------------------------------------------------
-def batchResize(srcPath, tgtPath, resOut, square, overwrite):
-    """Registered function batchResize, Resizes all files from the source
+def batch_resize(srcPath, tgtPath, resOut, square, overwrite):
+    """Registered function batch_resize, Resizes all files from the source
     folder, putting the results in the target folder. Additionally, can be
     specified to add white pixels to make the image square. Can be set to
     overwrite or avoid existing files.
@@ -94,7 +94,7 @@ def batchResize(srcPath, tgtPath, resOut, square, overwrite):
 
 #--Register the script--------------------------------------------------------
 register (
-    "batchResize",
+    "batch_resize",
     "Resize all images in the input folder and save them to the output",
     "Batch resize.",
     "Joe McGrath",
@@ -110,7 +110,7 @@ register (
     ( PF_BOOL, "overwrite", "Overwrite existing files:", False )
     ],
     [],
-    batchResize,   # Matches to name of function being defined
+    batch_resize,   # Matches to name of function being defined
     menu = "<Image>/Batch processing"  # Menu Location
     )   # End register
 

@@ -1,0 +1,1 @@
+ComputerCraft is a mod for Minecraft, these are a few scripts I written around 2014/2015.
