@@ -2,6 +2,7 @@
 
 import hashlib
 
+
 def hash_object(obj, algorithm):
     """
     Calculates the hash of an object by converting it to a string.
@@ -12,9 +13,10 @@ def hash_object(obj, algorithm):
     >>> hash_object('Hello', hashlib.md5())
     '8b1a9953c4611296a827abf8c47804d7'
     """
-    algorithm.update(str(obj).encode('utf-8'))
-    
+    algorithm.update(str(obj).encode("utf-8"))
+
     return algorithm.hexdigest()
+
 
 def sha256_object(obj):
     """
@@ -28,6 +30,8 @@ def sha256_object(obj):
     """
     return hash_object(obj, hashlib.sha256())
 
+
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()

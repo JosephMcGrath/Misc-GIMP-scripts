@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-def hex_counter(number:int, pad:int = 5) -> str:
+
+def hex_counter(number: int, pad: int = 5) -> str:
     """
     Converts an integet into hex, formatted as a string. Intended for more
     compact file names.
@@ -16,6 +17,8 @@ def hex_counter(number:int, pad:int = 5) -> str:
     """
     return str(hex(number))[2:].zfill(pad)
 
+
 if __name__ == "__main__":
     import doctest
+
     doctest.testmod()
