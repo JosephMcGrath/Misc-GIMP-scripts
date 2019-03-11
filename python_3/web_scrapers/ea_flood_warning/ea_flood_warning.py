@@ -95,3 +95,4 @@ if __name__ == "__main__":
     start_date = datetime.date.today() - datetime.timedelta(days=2)
     test = fetch_ea_rg(date=start_date, dir_out=r"_output_")
     test.fetch_seq(3, False)
+ 
