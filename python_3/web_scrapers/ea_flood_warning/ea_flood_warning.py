@@ -11,8 +11,13 @@ class fetch_ea_rg:
 
     base_url = "http://environment.data.gov.uk/flood-monitoring/archive/readings-{}.csv"
 
-    def __init__(self, year, month, day, dir_out=""):
-        self.date = datetime.date(year, month, day)
+    def __init__(self, date=None, year=None, month=None, day=None, dir_out=""):
+        if date is not None:
+            self.date = date
+        elif year is not None and month is not None and day is not None:
+            self.date = datetime.date(year, month, day)
+        else:
+            raise ValueError("No valid date set.")
 
         self.dir_out = dir_out
         self.base_raw = r"readings-{}.csv"
@@ -73,16 +78,20 @@ class fetch_ea_rg:
     def is_fetched(self):
         return self.is_in_dir() or self.is_in_zip()
 
-    def fetch_seq(self, days):
+    def fetch_seq(self, days, forwards=True):
         """Fetch a sequence of days."""
         for x in range(days):
             print(self.date)
             self.fetch_to_zip()
-            self.add_days(1)
+            if forwards:
+                self.add_days(1)
+            else:
+                self.add_days(-1)
             time.sleep(5)
 
 
 # ==============================================================================
 if __name__ == "__main__":
-    test = fetch_ea_rg(2018, 8, 17, r"E:\03_Data\EA_Levels")
-    test.fetch_seq(60)
+    start_date = datetime.date.today() - datetime.timedelta(days=2)
+    test = fetch_ea_rg(date=start_date, dir_out=r"_output_")
+    test.fetch_seq(3, False)
