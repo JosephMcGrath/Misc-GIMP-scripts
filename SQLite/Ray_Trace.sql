@@ -20,14 +20,14 @@ CREATE TABLE base_point (
   , the_geom POINT
 );
 
-SELECT RecoverGeometryColumn('base_point' , 'the_geom' , 4326 , 'POINT');
+SELECT RecoverGeometryColumn('base_point' , 'the_geom' , 27700 , 'POINT');
 
 CREATE TABLE wall (
     fid INTEGER PRIMARY KEY
   , the_geom LINESTRING
 );
 
-SELECT RecoverGeometryColumn('wall' , 'the_geom' , 4326 , 'LINESTRING');
+SELECT RecoverGeometryColumn('wall' , 'the_geom' , 27700 , 'LINESTRING');
 
 
 CREATE TABLE los (
@@ -35,10 +35,15 @@ CREATE TABLE los (
   , the_geom POLYGON
 );
 
-SELECT RecoverGeometryColumn('los' , 'the_geom' , 4326 , 'POLYGON');
+SELECT RecoverGeometryColumn('los' , 'the_geom' , 27700 , 'POLYGON');
 
 /*Intermediate Views*/
-CREATE VIEW base_ray AS SELECT fid, r AS angle, MakeLine(the_geom, ST_Project(the_geom, sight, r)) AS the_geom
+CREATE VIEW base_ray AS SELECT
+    fid
+  , r AS angle
+  , MakeLine(the_geom,
+             ST_Transform(ST_Project(ST_Transform(the_geom, 4326), sight, r), ST_SRID(the_geom))
+             ) AS the_geom
 FROM base_point CROSS JOIN angles ORDER BY r;
 
 CREATE VIEW split_ray AS SELECT r.fid, r.angle, Coalesce(ST_GeometryN(ST_Split(r.the_geom, w.the_geom), 1), r.the_geom) AS the_geom
